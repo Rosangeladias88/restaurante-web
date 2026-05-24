@@ -1,47 +1,70 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div>
+    <header class="topo">
+      <h1>Cafeteria da Rosa</h1>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+      <nav>
+        <RouterLink to="/">Início</RouterLink>
+        <RouterLink to="/cardapio">Cardápio</RouterLink>
+        <RouterLink to="/delivery">Delivery</RouterLink>
+        <RouterLink to="/reservas">Reservas</RouterLink>
+        <RouterLink to="/clientes">Clientes</RouterLink>
+      </nav>
+    </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.topo {
+  width: 100%;
+  background: #4b0f14;
+  color: white;
+  padding: 25px 40px;
+  text-align: center;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.topo h1 {
+  margin-bottom: 15px;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+
+
+nav a {
+  position: relative;
+  transition: 0.3s;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #f8c8dc;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+nav a:hover {
+  color: #f8c8dc;
 }
 </style>
