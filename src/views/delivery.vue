@@ -76,7 +76,8 @@ async function enviarPedido(event) {
     body: JSON.stringify(pedido)
   })
 
-  alert('Pedido realizado com sucesso!')
+  const dadosResposta = await reposta.json()
+  alert(dadosResposta.mensagem)
 
   limparCarrinho()
   form.reset()
