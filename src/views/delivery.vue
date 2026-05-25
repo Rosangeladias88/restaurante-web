@@ -48,16 +48,11 @@ function limparCarrinho() {
   localStorage.setItem('carrinho', JSON.stringify([]))
   calcularTotal()
 }
-
 async function enviarPedido(event) {
+  event.preventDefault()
+
   const form = event.target
   const dados = new FormData(form)
-
-  const pedidoCarrinho = carrinho.value.map(item => {
-    return `${item.nome} - Quantidade: ${item.quantidade || 1}`
-  }).join(', ')
-
-  const pedidoFinal = pedidoCarrinho || dados.get('pedido')
 
   const pedido = {
     nome: dados.get('nome'),
@@ -68,22 +63,24 @@ async function enviarPedido(event) {
     total: total.value
   }
 
-const resposta = await fetch('https://restaurante-web-v9v7.onrender.com/pedidos', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(pedido)
-})
+  try {
+    const resposta = await fetch('https://restaurante-web-v9v7.onrender.com/pedidos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(pedido)
+    })
 
-if (resposta.ok) {
-  const dadosResposta = await resposta.json()
-  alert(dadosResposta.mensagem || 'Pedido realizado com sucesso!')
-} else {
-  alert('Erro ao enviar pedido')
+    const dadosResposta = await resposta.json()
+
+    alert(dadosResposta.mensagem || 'Pedido realizado com sucesso!')
+
+  } catch (erro) {
+    alert('Erro ao enviar pedido')
+    console.log(erro)
+  }
 }
-
-limparCarrinho()
 
 </script>
 
