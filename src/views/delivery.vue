@@ -68,7 +68,7 @@ async function enviarPedido(event) {
     total: total.value
   }
 
-  await fetch('http://restaurante-web-v9v7.onrender.com/pedidos', {
+const resposta = await fetch('http://restaurante-web-v9v7.onrender.com/pedidos', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -76,12 +76,13 @@ async function enviarPedido(event) {
     body: JSON.stringify(pedido)
   })
 
-  const dadosResposta = await reposta.json()
-  alert(dadosResposta.mensagem)
-
-  limparCarrinho()
-  form.reset()
+if (resposta.ok) {
+    const dadosResposta = await resposta.json()
+    alert(dadosResposta.mensagem || 'pedido realizadado ccom sucesso!')
+} else {
+    alert('Erro ao enviar pedido')
 }
+
 </script>
 
 <template>
