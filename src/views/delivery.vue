@@ -50,7 +50,7 @@ function limparCarrinho() {
 }
 async function enviarPedido(event) {
   event.preventDefault()
-  alert("função enviarpedido rodou")
+  
 
   const form = event.target
   const dados = new FormData(form)
@@ -74,7 +74,7 @@ async function enviarPedido(event) {
     })
 
     const dadosResposta = await resposta.json()
-    
+
     console.log(dadosResposta)
     alert("chegou depois do json")
 
