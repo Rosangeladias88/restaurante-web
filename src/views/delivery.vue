@@ -75,6 +75,8 @@ async function enviarPedido(event) {
     const dadosResposta = await resposta.json()
 
     alert(dadosResposta.mensagem || 'Pedido realizado com sucesso!')
+    limparCarrinho()
+    form.reset()
 
   } catch (erro) {
     alert('Erro ao enviar pedido')
