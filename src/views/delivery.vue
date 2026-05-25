@@ -74,6 +74,9 @@ async function enviarPedido(event) {
     })
 
     const dadosResposta = await resposta.json()
+    
+    console.log(dadosResposta)
+    alert("chegou depois do json")
 
     alert(dadosResposta.mensagem || 'Pedido realizado com sucesso!')
     limparCarrinho()
