@@ -50,6 +50,7 @@ function limparCarrinho() {
 }
 async function enviarPedido(event) {
   event.preventDefault()
+  alert("função enviarpedido rodou")
 
   const form = event.target
   const dados = new FormData(form)
