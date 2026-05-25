@@ -13,7 +13,7 @@ function reservar(event) {
   const horario = form.horario.value
   const pessoas = form.pessoas.value
 
-  fetch('http://localhost:3000/reservas', {
+  fetch('http://restaurante-web-v9v7.onrender.com/reservas', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

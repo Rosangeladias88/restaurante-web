@@ -18,7 +18,7 @@ async function cadastrar(event) {
   }
 
   try {
-    const resposta = await fetch('http://localhost:3000/clientes', {
+    const resposta = await fetch('http://restaurante-web-v9v7.onrender.com/clientes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

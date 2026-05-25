@@ -68,7 +68,7 @@ async function enviarPedido(event) {
     total: total.value
   }
 
-  await fetch('http://localhost:3000/pedidos', {
+  await fetch('http://restaurante-web-v9v7.onrender.com/pedidos', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
