@@ -1,312 +1,194 @@
+cappucino.jpg
+cafe.jpg
+fatiadebolo.jpg
+bolodechocolate.jpg
+sucodemaracuja.jpg
+sucodemanga.jpg
+sucodemorango.jpg
+taioca.jpg
+tapiocacomcharque.jpg
+paocomovo.jpg
+mistoquente.jpg
+croissant.jpg
+lanches.jpg
+cafedamanha.jpg
 
 <script setup>
 import cappuccino from '../assets/imagens/cappucino.jpg'
-import croissant from '../assets/imagens/croissant.jpg'
-import bolo from '../assets/imagens/bolo.jpg'
 import cafe from '../assets/imagens/cafe.jpg'
-import cafeDaManha from '../assets/imagens/cafedamanha.jpg'
-import lanche from '../assets/imagens/lanches.jpg'
+import fatiaBolo from '../assets/imagens/fatiadebolo.jpg'
+import boloChocolate from '../assets/imagens/bolo.jpg'
+import sucoMaracuja from '../assets/imagens/sucodemaracuja.jpg'
+import sucoManga from '../assets/imagens/sucodemanga.jpg'
+import sucoMorango from '../assets/imagens/sucodemorango.jpg'
+import tapioca from '../assets/imagens/taioca.jpg'
+import tapiocaCharque from '../assets/imagens/tapiocacomcharque.jpg'
+import paoOvo from '../assets/imagens/paocomovo.jpg'
 import misto from '../assets/imagens/mistoquente.jpg'
-import taioca from '../assets/imagens/taioca.jpg'
-import  sucodemaracuja from '../assets/imagens/sucodemaracuja.jpg'
-import sucodemanga from '../assets/imagens/sucodemanga.jpg'
-import sucodemorango from '../assets/imagens/sucodemorango.jpg'
-import tapiocacomcharque from '../assets/imagens/tapiocacomcharque.jpg'
-import paocomovo from '../assets/imagens/paocomovo.jpg'
-import paocomovoequeijo from '../assets/imagens/paocomovoequeijo.jpg'
-import croisantt from '../assets/imagens/croissantt.jpg'
-import sagudemilho from '../assets/imagens/sagudemilho.jpg'
-import fatiadebolo from '../assets/imagens/fatiadebolo.jpg'
+import croissant from '../assets/imagens/croissant.jpg'
+import lanche from '../assets/imagens/lanches.jpg'
+import cafeDaManha from '../assets/imagens/cafedamanha.jpg'
 
+const categorias = [
+  {
+    titulo: '☕ Cafés e Cappuccinos',
+    produtos: [
+      { nome: 'Cappuccino', descricao: 'Café cremoso com leite vaporizado', preco: 'R$ 12,00', imagem: cappuccino },
+      { nome: 'Café Expresso', descricao: 'Café forte e aromático', preco: 'R$ 8,00', imagem: cafe }
+    ]
+  },
+  {
+    titulo: '🥤 Bebidas',
+    produtos: [
+      { nome: 'Suco de Maracujá', descricao: 'Suco natural gelado', preco: 'R$ 10,00', imagem: sucoMaracuja },
+      { nome: 'Suco de Manga', descricao: 'Suco natural gelado', preco: 'R$ 10,00', imagem: sucoManga },
+      { nome: 'Suco de Morango', descricao: 'Suco natural gelado', preco: 'R$ 10,00', imagem: sucoMorango }
+    ]
+  },
+  {
+    titulo: '🥪 Pães e Sanduíches',
+    produtos: [
+      { nome: 'Misto Quente', descricao: 'Pão com queijo e presunto', preco: 'R$ 12,00', imagem: misto },
+      { nome: 'Pão com Ovo', descricao: 'Pão artesanal com ovo mexido', preco: 'R$ 11,00', imagem: paoOvo },
+      { nome: 'Croissant', descricao: 'Massa folhada crocante', preco: 'R$ 14,00', imagem: croissant },
+      { nome: 'Lanche Natural', descricao: 'Lanche leve e saboroso', preco: 'R$ 13,00', imagem: lanche }
+    ]
+  },
+  {
+    titulo: '🥞 Tapiocas',
+    produtos: [
+      { nome: 'Tapioca', descricao: 'Tapioca recheada com queijo', preco: 'R$ 15,00', imagem: tapioca },
+      { nome: 'Tapioca com Charque', descricao: 'Tapioca recheada com charque', preco: 'R$ 18,00', imagem: tapiocaCharque }
+    ]
+  },
+  {
+    titulo: '🍰 Bolos e Sobremesas',
+    produtos: [
+      { nome: 'Fatia de Bolo', descricao: 'Fatia de bolo caseiro', preco: 'R$ 15,00', imagem: fatiaBolo },
+      { nome: 'Bolo de Chocolate', descricao: 'Bolo macio de chocolate', preco: 'R$ 15,00', imagem: boloChocolate }
+    ]
+  },
+  {
+    titulo: '🍽️ Combos',
+    produtos: [
+      { nome: 'Combo Café da Manhã', descricao: 'Café, pão e acompanhamento', preco: 'R$ 22,00', imagem: cafeDaManha }
+    ]
+  }
+]
 
-function adicionarAoCarrinho(nome, preco) {
+function adicionarAoCarrinho(produto) {
   const carrinhoSalvo = localStorage.getItem('carrinho')
-
-  const carrinho = carrinhoSalvo
-    ? JSON.parse(carrinhoSalvo)
-    : []
+  const carrinho = carrinhoSalvo ? JSON.parse(carrinhoSalvo) : []
 
   carrinho.push({
-    nome: nome,
-    preco: preco,
+    nome: produto.nome,
+    preco: produto.preco,
     quantidade: 1
   })
 
   localStorage.setItem('carrinho', JSON.stringify(carrinho))
-
-  alert(`${nome} adicionado ao carrinho!`)
+  alert(`${produto.nome} adicionado ao carrinho!`)
 }
 </script>
 
 <template>
   <section class="cardapio">
-    <h2>Cardápio da Cafeteria </h2>
+    <h2>Cardápio da Cafeteria</h2>
 
-    <div class="produtos">
-      <div class="card">
-        <img :src="cappuccino" alt="cappucino" class="foto">
-        <h3>Cappuccino</h3>
-        <p>Café cremoso com leite vaporizado.</p>
-        <strong>R$ 12,00</strong>
-        <button
-  class="btn-pedir"
-  @click="adicionarAoCarrinho('Cappuccino', 12.00)"
->
-  Pedir
-</button>
-      </div>
+    <div v-for="categoria in categorias" :key="categoria.titulo" class="categoria">
+      <h3>{{ categoria.titulo }}</h3>
 
-      <div class="card">
-        <div class="card">
-          <img :src="fatiadebolo" alt="Fatia de Bolo" class="foto">
-          <h3>Fatia de bolo</h3>
-          <p>Fatia de bolo caseiro</p>
-          <strong>R$ 15.00</strong>
-            <button class="btn-pedir" @click="adicionarAoCarrinho('Fatia de bolo', 15.00)">
-  Pedir
-</button>
+      <div class="produtos">
+        <div v-for="produto in categoria.produtos" :key="produto.nome" class="card">
+          <img :src="produto.imagem" :alt="produto.nome">
+
+          <h4>{{ produto.nome }}</h4>
+          <p>{{ produto.descricao }}</p>
+
+          <div class="rodape-card">
+            <strong>{{ produto.preco }}</strong>
+            <button @click="adicionarAoCarrinho(produto)">Pedir</button>
+          </div>
         </div>
-      </div>
-
-      <div class="card">
-  <img :src="paocomovo" alt="Pão com Ovo" class="foto">
-
-  <h3>Pão com Ovo</h3>
-
-  <p>Pão quentinho com ovo.</p>
-
-  <strong>R$ 11,00</strong>
-  <button class="btn-pedir" @click="adicionarAoCarrinho('Fatia de bolo', 15.00)">
-  Pedir
-</button>
-</div>
-
-<div class="card">
-  <img :src="sucodemanga" alt="Suco de Manga" class="foto">
-
-  <h3>Suco de Manga</h3>
-
-  <p>Suco natural gelado.</p>
-
-  <strong>R$ 10,00</strong>
-  <button class="btn-pedir" @click="adicionarAoCarrinho('Fatia de bolo', 15.00)">
-  Pedir
-</button>
-
-</div>
-
-      <div class="card">
-  <img :src="tapiocacomcharque" alt="Tapioca com Charque" class="foto">
-
-  <h3>Tapioca com Charque</h3>
-
-  <p>Tapioca recheada com charque.</p>
-
-  <strong>R$ 18,00</strong>
-  <button class="btn-pedir" @click="adicionarAoCarrinho('Fatia de bolo', 15.00)">
-  Pedir
-</button>
-</div>
-
-      <div class="card">
-  <img :src="sucodemaracuja" alt="Suco de Maracujá" class="foto">
-
-  <h3>Suco de Maracujá</h3>
-
-  <p>Suco natural gelado.</p>
-
-  <strong>R$ 10,00</strong>
-  <button class="btn-pedir" @click="adicionarAoCarrinho('Suco de Maracujá', 10.00)">
-  Pedir
-</button>
-</div>
-
-<div class="card">
-  <img :src="taioca" alt="Taioca" class="foto">
-
-  <h3>Tapioca</h3>
-
-  <p>Tapioca recheada com queijo.</p>
-
-  <strong>R$ 15,00</strong>
-  <button class="btn-pedir" @click="adicionarAoCarrinho('Tapioca', 15.00)">
-  Pedir
-</button>
-</div>
-
-<div class="card">
-  <img :src="misto" alt="Misto Quente" class="foto">
-
-  <h3>Misto Quente</h3>
-
-  <p>Pão quentinho com queijo e presunto.</p>
-
-  <strong>R$ 12,00</strong>
-  <button class="btn-pedir" @click="adicionarAoCarrinho('Fatia de bolo', 15.00)">
-  Pedir
-</button>
-</div>
-
-<div class="card">
-  <img :src="paocomovo" alt="Pão com Ovo" class="foto">
-
-  <h3>Pão com Ovo</h3>
-
-  <p>Pão artesanal com ovo mexido.</p>
-
-  <strong>R$ 11,00</strong>
-  <button class="btn-pedir" @click="adicionarAoCarrinho('Pão com Ovo', 11.00)">
-  Pedir
-</button>
-</div>
-
-      <div class="card">
-  <img :src="cafe" alt="Café Expresso" class="foto">
-  <h3>Café Expresso</h3>
-  <p>Café forte e aromático.</p>
-  <strong>R$ 8,00</strong>
-  <button class="btn-pedir" @click="adicionarAoCarrinho('Café Expresso', 8.00)">
-  Pedir
-</button>
-</div>
-
-<div class="card">
-  <img :src="misto" alt="Misto Quente" class="foto">
-  <h3>Misto Quente</h3>
-  <p>Pão quentinho com queijo e presunto.</p>
-  <strong>R$ 10,00</strong>
-  <button class="btn-pedir" @click="adicionarAoCarrinho('Misto Quente', 10.00)">
-  Pedir
-</button>
-</div>
-
-<div class="card">
-  <img :src="lanche" alt="Lanche Natural" class="foto">
-  <h3>Lanche Natural</h3>
-  <p>Opção leve e saborosa.</p>
-  <strong>R$ 13,00</strong>
-  <button class="btn-pedir" @click="adicionarAoCarrinho('Lanche Natural', 13.00)">
-  Pedir
-</button>
-</div>
-
-<div class="card">
-  <img :src="cafeDaManha" alt="Café da Manhã" class="foto">
-  <h3>Combo Café da Manhã</h3>
-  <p>Café, pão de queijo e bolo.</p>
-  <strong>R$ 22,00</strong>
-  <button class="btn-pedir" @click="adicionarAoCarrinho('Combo Café da Manhã', 22.00)">
-  Pedir
-</button>
-</div>
-
-      <div class="card">
-        <img :src="croissant" alt="Croissant" class="foto">
-        <h3>Croissant</h3>
-        <p>Massa folhada leve e crocante.</p>
-        <strong>R$ 14,00</strong>
-        <button class="btn-pedir" @click="adicionarAoCarrinho('Croissant', 14.00)">
-  Pedir
-</button>
-      </div>
-
-      <div class="card">
-        <img :src="bolo" alt="Bolo de Chocolate" class="foto">
-        <h3>Bolo de Chocolate</h3>
-        <p>Fatia macia com cobertura especial.</p>
-        <strong>R$ 15,00</strong>
-        <button class="btn-pedir" @click="adicionarAoCarrinho('Bolo de Chocolate', 15.00)">
-  Pedir
-</button>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
+.cardapio {
+  padding: 40px;
+  background: #f8f3f5;
+}
+
+.cardapio h2 {
+  text-align: center;
+  color: #3b0d1c;
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+.categoria {
+  margin-bottom: 50px;
+}
+
+.categoria h3 {
+  color: #4b1020;
+  font-size: 26px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #b04a76;
+  padding-bottom: 8px;
+}
 
 .produtos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 25px;
-  justify-items: center;
-  padding: 30px;
-}
-.cardapio h2 {
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  color: #4b0f14;
-  font-size: 40px;
 }
 
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
-.card h3 {
-  color: #4b0f14;
-  margin-top: 10px;
+
+.card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.card h4 {
+  color: #3b0d1c;
+  margin-top: 12px;
+  font-size: 20px;
 }
 
 .card p {
-  color: #666;
-  margin: 10px 0;
+  color: #555;
+  font-size: 15px;
 }
 
-.card strong {
-  color: #c2185b;
-  font-size: 18px;
+.rodape-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
 }
 
-.btn-pedir {
-  margin-top: 12px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  background: #c2185b;
+.rodape-card button {
+  background: #b04a76;
   color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
   cursor: pointer;
   font-weight: bold;
 }
 
-.btn-pedir:hover {
-  background: #8b1e3f;
-}
-
-.foto {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
-  transition: 0.3s;
-  .card:hover .foto{
-    transform: scale(1.05);
-  }
-}
-.foto{
-    width: 200px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-
-}
-
-
-@media (max-width: 768px) {
-  .card-reserva {
-    width: 90%;
-    padding: 25px;
-  }
-
-  input,
-  button {
-    width: 100%;
-  }
-
-  nav {
-    flex-direction: column;
-    gap: 10px;
-  }
+.rodape-card button:hover {
+  background: #8f345c;
 }
 </style>
